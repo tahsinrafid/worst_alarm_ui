@@ -1,0 +1,733 @@
+/* ============================================
+   WORST ALARM CLOCK CSS - Because You Deserve This
+   ============================================ */
+
+/* Global Chaos - because consistency is for losers */
+* {
+    box-sizing: border-box; /* We're not complete monsters */
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; /* Bouncy transitions because why not */
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Papyrus', 'Impact', 'Arial Black', sans-serif !important; /* The worst fonts known to humanity */
+    overflow-x: hidden; /* Hide horizontal scroll because we're "considerate" */
+    background-attachment: fixed; /* Because scrolling should be a nightmare */
+    animation: background-blink 3s ease-in-out infinite !important; /* Blinking background because we can */
+}
+
+/* Blinking background - because static backgrounds are boring */
+@keyframes background-blink {
+    0%, 100% { 
+        background: linear-gradient(135deg, #ff0000 0%, #8000ff 50%, #ffff00 100%);
+    }
+    25% { 
+        background: linear-gradient(135deg, #00ff00 0%, #ff00ff 50%, #00ffff 100%);
+    }
+    50% { 
+        background: linear-gradient(135deg, #ffff00 0%, #ff0080 50%, #0080ff 100%);
+    }
+    75% { 
+        background: linear-gradient(135deg, #ff8000 0%, #8000ff 50%, #00ff80 100%);
+    }
+}
+
+/* Header Styles - make it as obnoxious as possible */
+header {
+    animation: header-wobble 2s ease-in-out infinite !important;
+}
+
+@keyframes header-wobble {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(-3deg); }
+    25% { transform: translateX(-5px) translateY(3px) rotate(3deg); }
+    75% { transform: translateX(5px) translateY(-3px) rotate(-3deg); }
+}
+
+header h1 {
+    font-size: clamp(2rem, 20vw, 10rem) !important; /* Responsive? More like irresponsively massive */
+    letter-spacing: 0.3em !important; /* Because readability is for losers */
+    animation: rainbow-text 2s linear infinite !important;
+    transform-origin: center !important;
+    line-height: 1.1 !important; /* Cramped text is in this season */
+}
+
+/* Rainbow text animation - because one color is never enough */
+@keyframes rainbow-text {
+    0% { color: #ff0080; filter: hue-rotate(0deg); }
+    16.66% { color: #00ff80; filter: hue-rotate(60deg); }
+    33.33% { color: #0080ff; filter: hue-rotate(120deg); }
+    50% { color: #8000ff; filter: hue-rotate(180deg); }
+    66.66% { color: #ff8000; filter: hue-rotate(240deg); }
+    83.33% { color: #ffff00; filter: hue-rotate(300deg); }
+    100% { color: #ff0080; filter: hue-rotate(360deg); }
+}
+
+header p {
+    font-size: 1.5rem !important; /* Why use normal sizes when you can go big? */
+    text-transform: uppercase !important; /* SHOUTING IS ALWAYS BETTER */
+    animation: text-pulse 1.5s ease-in-out infinite !important;
+}
+
+@keyframes text-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* Alarm Setup Section - make it fight for attention */
+.bg-white.rounded-lg {
+    animation: setup-shake 4s ease-in-out infinite !important;
+    position: relative !important;
+}
+
+@keyframes setup-shake {
+    0%, 100% { transform: translateX(0) rotate(1deg); }
+    25% { transform: translateX(3px) rotate(-1deg); }
+    75% { transform: translateX(-3px) rotate(1deg); }
+}
+
+/* Number Inputs - make them as frustrating as possible */
+#hourInput, #minuteInput {
+    font-size: 3rem !important; /* Huge numbers because we can */
+    padding: 0.3rem 0.5rem !important; /* Tiny padding for maximum frustration */
+    width: 6rem !important; /* Fixed width because responsive is hard */
+    text-align: center !important;
+    border-width: 6px !important; /* Thick borders are back in style */
+    animation: input-glow 2s ease-in-out infinite !important;
+    font-family: 'Courier New', monospace !important; /* Monospace because we're retro */
+    outline: none !important; /* No outline because we're rebels */
+}
+
+@keyframes input-glow {
+    0%, 100% { 
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.6),
+                    inset 0 0 10px rgba(255, 0, 255, 0.4);
+    }
+    50% { 
+        box-shadow: 0 0 25px rgba(0, 255, 255, 0.9),
+                    inset 0 0 15px rgba(255, 255, 0, 0.6);
+    }
+}
+
+#hourInput:focus, #minuteInput:focus {
+    animation: input-focus-chaos 1s ease-in-out infinite !important;
+    transform: scale(1.05) rotate(2deg) !important;
+}
+
+@keyframes input-focus-chaos {
+    0%, 100% { 
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.8),
+                    inset 0 0 15px rgba(255, 0, 255, 0.5);
+        border-color: #ff0000;
+    }
+    50% { 
+        box-shadow: 0 0 30px rgba(0, 255, 255, 1),
+                    inset 0 0 20px rgba(255, 255, 0, 0.7);
+        border-color: #00ffff;
+    }
+}
+
+/* Labels for inputs - make them confusing */
+label {
+    font-size: 1.2rem !important;
+    animation: label-color-shift 3s ease-in-out infinite !important;
+    margin-bottom: 0.3rem !important; /* Tiny margin because we're evil */
+}
+
+@keyframes label-color-shift {
+    0%, 100% { color: #00ffff; }
+    33% { color: #ff00ff; }
+    66% { color: #ffff00; }
+}
+
+/* AM/PM Buttons - make them tiny and hard to click */
+#amBtn, #pmBtn {
+    font-size: 1rem !important; /* Smaller than you'd expect */
+    padding: 0.5rem 1rem !important; /* Tiny padding for maximum frustration */
+    min-width: 4rem !important; /* Small hit target */
+    min-height: 2.5rem !important;
+    border: none !important;
+    outline: 3px solid transparent !important;
+    animation: button-pulse 2s ease-in-out infinite !important;
+    cursor: pointer !important; /* At least we have this */
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+@keyframes button-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 25px rgba(0, 255, 0, 0.8);
+    }
+}
+
+#amBtn:hover, #pmBtn:hover {
+    animation: button-hover-chaos 0.5s ease-in-out infinite !important;
+    transform: scale(1.1) rotate(5deg) !important;
+}
+
+@keyframes button-hover-chaos {
+    0%, 100% { 
+        filter: brightness(1.1) saturate(1.2);
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.9);
+    }
+    50% { 
+        filter: brightness(1.3) saturate(1.5);
+        box-shadow: 0 0 30px rgba(255, 255, 0, 1);
+    }
+}
+
+#amBtn:active, #pmBtn:active {
+    transform: scale(0.9) rotate(-5deg) !important;
+    animation: none !important;
+}
+
+/* Set Alarm Button - make it obnoxious */
+#setAlarmBtn {
+    font-size: 1.3rem !important;
+    padding: 0.8rem 2rem !important;
+    min-width: 12rem !important;
+    min-height: 3.5rem !important;
+    border: none !important;
+    animation: set-button-pulse 1.5s ease-in-out infinite !important;
+    cursor: pointer !important;
+}
+
+@keyframes set-button-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+    }
+    50% { 
+        transform: scale(1.08);
+        box-shadow: 0 0 40px rgba(255, 0, 0, 1);
+    }
+}
+
+#setAlarmBtn:hover {
+    animation: set-button-hover 0.3s ease-in-out infinite !important;
+    transform: scale(1.15) rotate(3deg) !important;
+}
+
+@keyframes set-button-hover {
+    0%, 100% { 
+        filter: brightness(1.2);
+        box-shadow: 0 0 35px rgba(255, 0, 0, 0.9);
+    }
+    50% { 
+        filter: brightness(1.4);
+        box-shadow: 0 0 50px rgba(255, 255, 0, 1);
+    }
+}
+
+/* Active Alarm Display - the main event of suffering */
+#activeAlarm {
+    animation: alarm-active-chaos 1s ease-in-out infinite !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+@keyframes alarm-active-chaos {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        box-shadow: 0 0 50px rgba(255, 255, 0, 0.9);
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #ef4444 100%);
+    }
+    25% { 
+        transform: scale(1.04) rotate(1deg);
+        box-shadow: 0 0 70px rgba(255, 0, 255, 1);
+        background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #dc2626 100%);
+    }
+    50% { 
+        transform: scale(1.06) rotate(0deg);
+        box-shadow: 0 0 90px rgba(0, 255, 255, 1);
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #ef4444 100%);
+    }
+    75% { 
+        transform: scale(1.04) rotate(-1deg);
+        box-shadow: 0 0 70px rgba(255, 0, 255, 1);
+        background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #dc2626 100%);
+    }
+}
+
+#activeAlarm h2 {
+    font-size: 4rem !important; /* Massive text because subtlety is dead */
+    animation: alarm-text-shake 0.4s ease-in-out infinite !important;
+    margin-bottom: 1rem !important;
+}
+
+@keyframes alarm-text-shake {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    25% { transform: translateX(-3px) translateY(3px) rotate(1deg); }
+    75% { transform: translateX(3px) translateY(-3px) rotate(-1deg); }
+}
+
+#activeAlarmTime {
+    animation: time-flash 1s ease-in-out infinite !important;
+}
+
+@keyframes time-flash {
+    0%, 100% { opacity: 1; color: #fef08a; }
+    50% { opacity: 0.6; color: #fbbf24; }
+}
+
+/* Stop and Snooze buttons - make them tiny and hard to click */
+#stopBtn, #snoozeBtn {
+    font-size: 1.1rem !important; /* Smaller than expected */
+    padding: 0.6rem 1.2rem !important; /* Tiny padding */
+    min-width: 7rem !important; /* Small hit target */
+    min-height: 3rem !important;
+    border-radius: 9999px !important; /* Perfect circles because we're inconsistent */
+    margin: 0.3rem !important; /* Tiny margins for maximum frustration */
+    animation: control-button-pulse 1.5s ease-in-out infinite !important;
+    cursor: pointer !important;
+    border: none !important;
+}
+
+@keyframes control-button-pulse {
+    0%, 100% { 
+        transform: scale(1) rotate(-5deg);
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.7);
+    }
+    50% { 
+        transform: scale(1.03) rotate(-3deg);
+        box-shadow: 0 0 45px rgba(255, 0, 0, 1);
+    }
+}
+
+#stopBtn:hover, #snoozeBtn:hover {
+    animation: control-button-hover 0.4s ease-in-out infinite !important;
+    transform: scale(0.95) rotate(-7deg) !important;
+}
+
+@keyframes control-button-hover {
+    0%, 100% { 
+        filter: brightness(0.9);
+        box-shadow: 0 0 35px rgba(255, 0, 0, 0.9);
+    }
+    50% { 
+        filter: brightness(1.1);
+        box-shadow: 0 0 50px rgba(255, 255, 0, 1);
+    }
+}
+
+#stopBtn:active, #snoozeBtn:active {
+    transform: scale(0.85) rotate(-10deg) !important;
+    animation: none !important;
+}
+
+/* Message Display Area - make it annoying */
+#messageArea {
+    animation: message-area-wobble 5s ease-in-out infinite !important;
+}
+
+@keyframes message-area-wobble {
+    0%, 100% { transform: translateX(0) rotate(-1deg); }
+    50% { transform: translateX(4px) rotate(1deg); }
+}
+
+#messageContainer {
+    min-height: 3rem !important;
+}
+
+#messageContainer p {
+    font-size: 1.1rem !important;
+    animation: message-fade 3s ease-in-out infinite !important;
+    padding: 0.5rem !important;
+    margin: 0.3rem 0 !important;
+}
+
+@keyframes message-fade {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+#defaultMessage {
+    font-style: italic !important;
+    color: #6b7280 !important;
+}
+
+/* GIF Container - make it blink like a strobe light */
+#gifContainer {
+    animation: gif-container-blink 0.8s ease-in-out infinite !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+@keyframes gif-container-blink {
+    0%, 100% { 
+        opacity: 1;
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+    }
+    50% { 
+        opacity: 0.3;
+        box-shadow: 0 0 50px rgba(255, 0, 255, 1);
+    }
+}
+
+#gifContainer img {
+    animation: gif-shake 0.5s ease-in-out infinite !important;
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+@keyframes gif-shake {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    25% { transform: translateX(-5px) translateY(5px) rotate(2deg); }
+    75% { transform: translateX(5px) translateY(-5px) rotate(-2deg); }
+}
+
+/* Current Time Display - make it obnoxious */
+#currentTime {
+    font-size: 4.5rem !important; /* Huge time display */
+    font-weight: 900 !important;
+    letter-spacing: 0.15em !important;
+    animation: time-glow-chaos 1.5s ease-in-out infinite !important;
+    text-shadow: 
+        0 0 10px #ff00ff,
+        0 0 20px #00ffff,
+        0 0 30px #ffff00,
+        0 0 40px #ff0080 !important; /* Quadruple glow because one isn't enough */
+}
+
+@keyframes time-glow-chaos {
+    0%, 100% { 
+        text-shadow: 
+            0 0 10px #ff00ff,
+            0 0 20px #00ffff,
+            0 0 30px #ffff00,
+            0 0 40px #ff0080;
+        color: #ffff00;
+    }
+    25% { 
+        text-shadow: 
+            0 0 15px #00ffff,
+            0 0 25px #ff00ff,
+            0 0 35px #00ff80,
+            0 0 45px #ff0080;
+        color: #00ffff;
+    }
+    50% { 
+        text-shadow: 
+            0 0 20px #ffff00,
+            0 0 30px #ff0080,
+            0 0 40px #00ffff,
+            0 0 50px #ff00ff;
+        color: #ff00ff;
+    }
+    75% { 
+        text-shadow: 
+            0 0 15px #ff0080,
+            0 0 25px #ffff00,
+            0 0 35px #ff00ff,
+            0 0 45px #00ffff;
+        color: #ff0080;
+    }
+}
+
+/* Alarm List - make it chaotic */
+#alarmList {
+    animation: list-gentle-move 6s ease-in-out infinite !important;
+}
+
+@keyframes list-gentle-move {
+    0%, 100% { transform: translateX(0) rotate(0.5deg); }
+    50% { transform: translateX(3px) rotate(-0.5deg); }
+}
+
+#alarmList h2 {
+    font-size: 1.8rem !important;
+    margin-bottom: 0.8rem !important;
+    animation: list-title-color 4s ease-in-out infinite !important;
+}
+
+@keyframes list-title-color {
+    0%, 100% { color: #ff0080; }
+    50% { color: #8000ff; }
+}
+
+#alarmsContainer {
+    min-height: 2rem !important;
+}
+
+#alarmsContainer p {
+    font-size: 0.95rem !important;
+    font-style: italic !important;
+    color: #6b7280 !important;
+    animation: fade-in-out 4s ease-in-out infinite !important;
+}
+
+@keyframes fade-in-out {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* Modal Styles - make it as annoying as possible */
+#annoyingModal {
+    backdrop-filter: blur(8px) !important; /* Blur because we're fancy */
+    animation: modal-fade-in 0.3s ease-out !important;
+}
+
+@keyframes modal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#annoyingModal > div {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%) !important;
+    padding: 2rem !important;
+    max-width: 90vw !important; /* Responsive but annoying */
+    animation: modal-shake 0.6s ease-in-out infinite !important;
+    box-shadow: 
+        0 0 60px rgba(255, 0, 255, 0.9),
+        inset 0 0 40px rgba(255, 255, 0, 0.4) !important;
+}
+
+@keyframes modal-shake {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(3deg); }
+    25% { transform: translateX(-4px) translateY(4px) rotate(-3deg); }
+    75% { transform: translateX(4px) translateY(-4px) rotate(3deg); }
+}
+
+#annoyingModal h3 {
+    font-size: 2.2rem !important;
+    margin-bottom: 0.8rem !important;
+    animation: modal-title-pulse 1.2s ease-in-out infinite !important;
+}
+
+@keyframes modal-title-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+#modalMessage {
+    font-size: 1.3rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.2rem !important;
+    animation: message-color-shift 2.5s ease-in-out infinite !important;
+}
+
+@keyframes message-color-shift {
+    0%, 100% { color: #0000ff; }
+    50% { color: #ff0080; }
+}
+
+#closeModal {
+    font-size: 1rem !important;
+    padding: 0.7rem 1.5rem !important;
+    min-width: 9rem !important;
+    min-height: 2.8rem !important;
+    cursor: pointer !important;
+    border: none !important;
+}
+
+/* Toast Container */
+#toastContainer {
+    max-width: 22rem !important; /* Narrow toasts because we're considerate */
+    z-index: 40 !important;
+}
+
+/* Loading Spinner - make it obnoxious */
+#loadingSpinner {
+    backdrop-filter: blur(12px) !important;
+    animation: spinner-fade-in 0.3s ease-out !important;
+}
+
+@keyframes spinner-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#loadingSpinner > div {
+    animation: spinner-container-pulse 1.8s ease-in-out infinite !important;
+}
+
+@keyframes spinner-container-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+}
+
+#loadingSpinner p {
+    font-size: 1.6rem !important;
+    animation: loading-text-color 2s ease-in-out infinite !important;
+}
+
+@keyframes loading-text-color {
+    0%, 100% { color: #ffffff; }
+    50% { color: #fbbf24; }
+}
+
+/* Screen Shake Animation - for when alarm goes off */
+@keyframes screen-shake {
+    0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+    10% { transform: translateX(-10px) translateY(-5px) rotate(-1deg); }
+    20% { transform: translateX(10px) translateY(5px) rotate(1deg); }
+    30% { transform: translateX(-8px) translateY(8px) rotate(-0.5deg); }
+    40% { transform: translateX(8px) translateY(-8px) rotate(0.5deg); }
+    50% { transform: translateX(-6px) translateY(6px) rotate(-1deg); }
+    60% { transform: translateX(6px) translateY(-6px) rotate(1deg); }
+    70% { transform: translateX(-4px) translateY(4px) rotate(-0.5deg); }
+    80% { transform: translateX(4px) translateY(-4px) rotate(0.5deg); }
+    90% { transform: translateX(-2px) translateY(2px) rotate(-0.3deg); }
+}
+
+.screen-shaking {
+    animation: screen-shake 0.5s ease-in-out infinite !important;
+}
+
+/* Mobile-specific styles - because mobile users deserve special treatment */
+@media (max-width: 768px) {
+    /* Make everything smaller and more cramped */
+    body {
+        font-size: 0.85rem !important; /* Smaller base font */
+    }
+    
+    header h1 {
+        font-size: 2.5rem !important; /* Still huge but manageable */
+        letter-spacing: 0.15em !important;
+    }
+    
+    #hourInput, #minuteInput {
+        width: 4.5rem !important; /* Smaller inputs */
+        font-size: 2.2rem !important;
+        padding: 0.2rem 0.4rem !important;
+    }
+    
+    #amBtn, #pmBtn {
+        font-size: 0.9rem !important;
+        padding: 0.4rem 0.8rem !important;
+        min-width: 3.5rem !important;
+        min-height: 2.2rem !important;
+    }
+    
+    #setAlarmBtn {
+        font-size: 1.1rem !important;
+        padding: 0.6rem 1.5rem !important;
+        min-width: 10rem !important;
+        min-height: 3rem !important;
+    }
+    
+    #stopBtn, #snoozeBtn {
+        font-size: 0.95rem !important;
+        padding: 0.5rem 1rem !important;
+        min-width: 6rem !important;
+        min-height: 2.5rem !important;
+        margin: 0.2rem !important;
+    }
+    
+    #activeAlarm h2 {
+        font-size: 2.5rem !important;
+    }
+    
+    #currentTime {
+        font-size: 2.8rem !important; /* Smaller time display */
+    }
+    
+    #messageArea {
+        padding: 1rem !important;
+    }
+    
+    #messageContainer p {
+        font-size: 0.95rem !important;
+    }
+    
+    #annoyingModal > div {
+        padding: 1.2rem !important;
+        max-width: 95vw !important; /* Almost full width */
+    }
+    
+    #annoyingModal h3 {
+        font-size: 1.6rem !important;
+    }
+    
+    #modalMessage {
+        font-size: 1.1rem !important;
+    }
+    
+    #loadingSpinner p {
+        font-size: 1.3rem !important;
+    }
+}
+
+/* Desktop-specific styles - because desktop users need more chaos */
+@media (min-width: 1024px) {
+    /* Make everything slightly larger and more spread out */
+    #hourInput, #minuteInput {
+        width: 7rem !important; /* Larger inputs */
+        font-size: 3.5rem !important;
+    }
+    
+    #currentTime {
+        font-size: 5.5rem !important; /* Even larger time display */
+    }
+    
+    /* Add more animations on desktop because we can */
+    .bg-white.rounded-lg:hover {
+        animation: setup-hover 0.5s ease-in-out infinite !important;
+    }
+    
+    @keyframes setup-hover {
+        0%, 100% { transform: scale(1) rotate(1deg); }
+        50% { transform: scale(1.01) rotate(0.5deg); }
+    }
+}
+
+/* Print styles - because someone might try to print this nightmare */
+@media print {
+    * {
+        animation: none !important; /* No animations when printing */
+        background: white !important;
+        color: black !important;
+    }
+    
+    .bg-white.rounded-lg, #activeAlarm, #alarmList {
+        border: 1px solid #000 !important;
+        page-break-inside: avoid !important;
+    }
+}
+
+/* Accessibility "features" - we're not complete monsters, just mostly */
+button:focus-visible {
+    outline: 4px solid #ff00ff !important; /* Visible focus because we're not that evil */
+    outline-offset: 3px !important;
+    animation: focus-pulse 1s ease-in-out infinite !important;
+}
+
+@keyframes focus-pulse {
+    0%, 100% { outline-width: 4px; }
+    50% { outline-width: 6px; }
+}
+
+input:focus-visible {
+    outline: 4px solid #00ffff !important;
+    outline-offset: 3px !important;
+}
+
+/* Utility classes for maximum chaos */
+.hidden {
+    display: none !important; /* Override Tailwind's hidden */
+}
+
+/* Make sure rotated elements stay rotated */
+.transform {
+    will-change: transform !important; /* Performance optimization because we're not complete monsters */
+}
+
+/* Disable text selection - because we hate accessibility */
+* {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Make inputs slightly harder to use */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    opacity: 0.2; /* Because we want to make your life harder */
+    cursor: pointer !important;
+}
+
+/* End of CSS - you survived! (Barely) */

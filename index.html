@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tiRiPoli NiQqa deR jOnNo joGGhoNnOooo aLaRm uAi</title>
+    <!-- Tailwind CDN - because setting up a build process is for peasants -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- Audio element - we'll make it play karlsonVibe.mp3 when you least expect it -->
+    <audio id="alarmSound" src="karlsonVibe.mp3" preload="auto"></audio>
+</head>
+<body class="bg-gradient-to-br from-red-600 via-purple-500 to-yellow-400 min-h-screen overflow-x-hidden">
+    
+    <!-- Main Container - because containers are important, right? -->
+    <div class="container mx-auto px-4 py-8 transform rotate-2">
+        
+        <!-- Header - the title that makes no sense but we're using it anyway -->
+        <header class="text-center mb-8 transform -rotate-3">
+            <h1 class="text-5xl md:text-7xl font-bold text-white drop-shadow-2xl" style="text-shadow: 4px 4px 0px #000, -4px -4px 0px #ff00ff, 0 0 30px #ffff00;">
+                tiRiPoli NiQqa deR jOnNo joGGhoNnOooo aLaRm uAi
+            </h1>
+            <p class="text-xl mt-3 text-black font-mono font-bold">Wake up, niqqa! (We're not sorry)</p>
+        </header>
+
+        <!-- Alarm Setup Section - because setting alarms should be a nightmare -->
+        <div class="bg-white rounded-lg shadow-2xl p-8 mb-6 transform rotate-1" style="border: 6px solid #ff00ff;">
+            <h2 class="text-3xl font-bold mb-6 text-center" style="color: #ff0080; transform: rotate(-2deg);">
+                Set Your Alarm (Good Luck)
+            </h2>
+            
+            <!-- Random Number Inputs - because why use a time picker when you can suffer? -->
+            <div class="flex flex-col md:flex-row gap-6 items-center justify-center mb-6">
+                <!-- Hour Input - randomly placed -->
+                <div class="transform rotate-3">
+                    <label class="block text-xl font-bold mb-2" style="color: #00ffff;">Hour (Pick a number, any number!)</label>
+                    <input type="number" id="hourInput" min="1" max="12" value="8" 
+                           class="w-24 px-4 py-3 text-4xl font-bold border-4 border-red-500 rounded-lg bg-pink-200 text-center" 
+                           style="transform: rotate(-2deg);">
+                </div>
+                
+                <div class="text-6xl font-bold transform rotate-12" style="color: #ff0080;">:</div>
+                
+                <!-- Minute Input - also randomly placed -->
+                <div class="transform -rotate-2">
+                    <label class="block text-xl font-bold mb-2" style="color: #ffff00;">Minutes (or seconds? Who cares!)</label>
+                    <input type="number" id="minuteInput" min="0" max="59" value="0" 
+                           class="w-24 px-4 py-3 text-4xl font-bold border-4 border-blue-500 rounded-lg bg-cyan-200 text-center"
+                           style="transform: rotate(1deg);">
+                </div>
+            </div>
+
+            <!-- AM/PM Buttons - because toggles are too easy -->
+            <div class="mb-6 text-center transform rotate-1">
+                <p class="text-lg font-bold mb-3" style="color: #ff00ff;">AM or PM? (Choose wisely... or don't)</p>
+                <div class="flex gap-4 justify-center">
+                    <button id="amBtn" class="px-8 py-4 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transform hover:rotate-3 transition-all text-xl" style="box-shadow: 0 0 15px #00ff00;">
+                        AM
+                    </button>
+                    <button id="pmBtn" class="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transform hover:-rotate-3 transition-all text-xl" style="box-shadow: 0 0 15px #ff8800;">
+                        PM
+                    </button>
+                </div>
+            </div>
+
+            <!-- Set Alarm Button - because we need a button to do things -->
+            <button id="setAlarmBtn" class="block mx-auto px-10 py-5 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transform hover:scale-110 transition-all text-2xl" style="box-shadow: 0 0 25px #ff0000;">
+                Set Alarm (Maybe It'll Work)
+            </button>
+        </div>
+
+        <!-- Active Alarm Display - the main event -->
+        <div id="activeAlarm" class="hidden bg-red-600 rounded-lg shadow-2xl p-12 mb-6 transform rotate-0" style="border: 10px solid #ffff00; animation: pulse 1s infinite;">
+            <h2 class="text-5xl font-bold text-center mb-6 text-white" style="text-shadow: 4px 4px 0px #000, -4px -4px 0px #ff00ff;">
+                🔔 WAKE UP, NiQQa! 🔔
+            </h2>
+            <div class="text-center mb-8">
+                <p class="text-4xl font-bold text-yellow-300 mb-2" id="activeAlarmTime">00:00 AM</p>
+            </div>
+            
+            <!-- Stop and Snooze Buttons - make them hard to click -->
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                <button id="stopBtn" class="px-12 py-6 bg-black text-white font-bold rounded-full hover:bg-gray-800 transform hover:scale-90 transition-all text-2xl" 
+                        style="box-shadow: 0 0 30px #ff0000; transform: rotate(-5deg);">
+                    STOP
+                </button>
+                
+                <button id="snoozeBtn" class="px-12 py-6 bg-yellow-400 text-black font-bold rounded-full hover:bg-yellow-500 transform hover:scale-90 transition-all text-2xl"
+                        style="box-shadow: 0 0 30px #ffff00; transform: rotate(5deg);">
+                    SNOOZE
+                </button>
+            </div>
+        </div>
+
+        <!-- Message Display Area - for passive-aggressive messages -->
+        <div id="messageArea" class="bg-yellow-200 rounded-lg shadow-xl p-6 mb-6 transform -rotate-1" style="border: 4px solid #ff0080;">
+            <h3 class="text-2xl font-bold mb-4 text-center" style="color: #ff0000; transform: rotate(1deg);">
+                Messages (Because We Care)
+            </h3>
+            <div id="messageContainer" class="space-y-3">
+                <!-- Messages will appear here via JS -->
+                <p class="text-center text-gray-600 italic" id="defaultMessage">No messages yet. Your suffering hasn't begun.</p>
+            </div>
+        </div>
+
+        <!-- GIF Container for Thanos - because memes make everything better -->
+        <div id="gifContainer" class="hidden bg-black rounded-lg shadow-2xl p-6 mb-6 transform rotate-1" style="border: 5px solid #00ffff;">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4 text-white">Thanos Has Spoken</h3>
+                <img id="thanosGif" src="" alt="Thanos GIF" class="mx-auto rounded-lg" style="max-width: 100%; height: auto;">
+            </div>
+        </div>
+
+        <!-- Current Time Display - so you know how late you are -->
+        <div class="bg-black text-white rounded-lg shadow-2xl p-6 text-center transform -rotate-1" style="border: 5px solid #ff00ff;">
+            <p class="text-sm mb-2" style="color: #00ffff;">Current Time (Probably Wrong)</p>
+            <p class="text-5xl font-bold font-mono" id="currentTime" style="color: #ffff00; text-shadow: 0 0 20px #ff00ff;">
+                00:00:00
+            </p>
+        </div>
+
+        <!-- Alarm List - show all your scheduled suffering -->
+        <div id="alarmList" class="bg-white rounded-lg shadow-xl p-6 mb-6 transform rotate-0.5" style="border: 4px solid #00ff00;">
+            <h2 class="text-2xl font-bold mb-4 text-center" style="color: #ff0080; transform: rotate(-1deg);">
+                Your Scheduled Alarms
+            </h2>
+            <div id="alarmsContainer" class="space-y-4">
+                <!-- Alarms will be dynamically added here by JS -->
+                <p class="text-center text-gray-500 italic">No alarms set. Your mornings are safe... for now.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal for annoying messages - because popups are the best -->
+    <div id="annoyingModal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-yellow-300 rounded-lg p-8 max-w-md transform rotate-3" style="border: 8px solid #ff00ff;">
+            <h3 class="text-3xl font-bold mb-4 text-center" style="color: #ff0000;">⚠️ Important Message ⚠️</h3>
+            <p id="modalMessage" class="text-xl mb-6 text-center" style="color: #0000ff;">This is probably important. Or not. Who knows?</p>
+            <button id="closeModal" class="block mx-auto px-8 py-4 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700">
+                Close (If You Can)
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast notification area -->
+    <div id="toastContainer" class="fixed top-4 right-4 z-40 space-y-2">
+        <!-- Toasts will appear here dynamically -->
+    </div>
+
+    <!-- Loading spinner - because we need to waste more time -->
+    <div id="loadingSpinner" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-yellow-500 transform rotate-45"></div>
+            <p class="text-white text-2xl font-bold mt-4">Loading... (This is taking forever, isn't it?)</p>
+        </div>
+    </div>
+
+    <!-- Scripts - link to our JavaScript file -->
+    <script src="script.js"></script>
+    
+    <!-- Inline script for basic time display - the only thing that actually works -->
+    <script>
+        // Basic clock update - because we're not complete monsters
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            const timeElement = document.getElementById('currentTime');
+            if (timeElement) {
+                timeElement.textContent = timeString;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+
+    <!-- Custom styles for extra chaos -->
+    <style>
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(2deg); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-2deg); }
+            75% { transform: translateX(10px) rotate(2deg); }
+        }
+        
+        /* Because we hate accessibility */
+        * {
+            user-select: none; /* Can't select text, because reasons */
+        }
+        
+        /* Make inputs slightly harder to use */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 0.3; /* Because we want to make your life harder */
+        }
+    </style>
+
+</body>
+</html>
