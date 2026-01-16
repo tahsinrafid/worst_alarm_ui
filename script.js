@@ -11,6 +11,7 @@ let currentAMPM = 'AM'; // Current AM/PM selection (will flip randomly)
 let randomNumberInterval = null; // Interval for random number generation
 let ampmChaosInterval = null; // Interval for AM/PM button chaos
 let stopButtonChaosInterval = null; // Interval for stop button chaos
+let buttonPositionSwapInterval = null; // Interval for swapping stop/snooze button positions
 let volumeIncreaseInterval = null; // Interval for gradually increasing volume
 let thanosGifTimeout = null; // Timeout for hiding Thanos GIF
 let screenShakeInterval = null; // Interval for screen shake
@@ -475,6 +476,9 @@ function triggerAlarm(alarm) {
     // Start stop button chaos
     startStopButtonChaos();
     
+    // Start button position swapping
+    startButtonPositionSwap();
+    
     // Try to vibrate (if supported)
     if (navigator.vibrate) {
         const vibratePattern = [200, 100, 200, 100, 200, 100, 200];
@@ -518,7 +522,35 @@ function startVolumeIncrease(startVolume) {
     }, 500); // Increase every 500ms
 }
 
-// Start stop button chaos - moves randomly, changes color, alternates text
+// Start button position swapping - swap stop and snooze positions
+function startButtonPositionSwap() {
+    const stopBtn = document.getElementById('stopBtn');
+    const snoozeBtn = document.getElementById('snoozeBtn');
+    
+    if (!stopBtn || !snoozeBtn) return;
+    
+    buttonPositionSwapInterval = setInterval(function() {
+        if (!isAlarmRinging || !stopBtn || !snoozeBtn) {
+            clearInterval(buttonPositionSwapInterval);
+            buttonPositionSwapInterval = null;
+            return;
+        }
+        
+        // Get parent container
+        const parent = stopBtn.parentElement;
+        if (!parent) return;
+        
+        // Swap positions
+        if (stopBtn.nextSibling === snoozeBtn) {
+            parent.insertBefore(snoozeBtn, stopBtn);
+        } else {
+            parent.insertBefore(stopBtn, snoozeBtn);
+        }
+        
+    }, 800); // Swap every 800ms
+}
+
+// Start stop button chaos - changes color, alternates text
 function startStopButtonChaos() {
     const stopBtn = document.getElementById('stopBtn');
     if (!stopBtn) return;
@@ -532,13 +564,6 @@ function startStopButtonChaos() {
             return;
         }
         
-        // Randomly move button
-        const randomX = (Math.random() - 0.5) * 100; // -50 to +50 pixels
-        const randomY = (Math.random() - 0.5) * 100;
-        const randomRotate = (Math.random() - 0.5) * 20; // -10 to +10 degrees
-        
-        stopBtn.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${randomRotate}deg)`;
-        
         // Change color rapidly
         const colors = ['#000000', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
@@ -548,12 +573,20 @@ function startStopButtonChaos() {
         isStopText = !isStopText;
         stopBtn.textContent = isStopText ? 'STOP' : 'EEE cdi';
         
-    }, 300); // Update every 300ms for maximum chaos
+    }, 600); // Update every 600ms
 }
 
 // Handle stop alarm
 function handleStopAlarm() {
     if (!isAlarmRinging) return;
+    
+    const stopBtn = document.getElementById('stopBtn');
+    
+    // Only stop if button text is "STOP" - "EEE cdi" is just for ragebaiting
+    if (stopBtn && stopBtn.textContent.trim() !== 'STOP') {
+        showMessage('Nice try! Wait for "STOP" to appear...', 'warning');
+        return;
+    }
     
     // Sometimes require multiple clicks
     if (Math.random() > 0.7) {
@@ -616,6 +649,9 @@ function handleSnooze() {
                     // Start stop button chaos
                     startStopButtonChaos();
                     
+                    // Start button position swapping
+                    startButtonPositionSwap();
+                    
                     // Try to vibrate
                     if (navigator.vibrate) {
                         const vibratePattern = [200, 100, 200, 100, 200, 100, 200];
@@ -659,6 +695,12 @@ function stopAlarm() {
     if (stopButtonChaosInterval) {
         clearInterval(stopButtonChaosInterval);
         stopButtonChaosInterval = null;
+    }
+    
+    // Stop button position swap
+    if (buttonPositionSwapInterval) {
+        clearInterval(buttonPositionSwapInterval);
+        buttonPositionSwapInterval = null;
     }
     
     // Reset stop button
