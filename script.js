@@ -251,10 +251,24 @@ function showThanosGif() {
     const gifContainer = document.getElementById('gifContainer');
     const thanosGif = document.getElementById('thanosGif');
     
-    if (!gifContainer || !thanosGif) return;
+    if (!gifContainer || !thanosGif) {
+        console.error('GIF container or image element not found');
+        return;
+    }
     
-    // Set GIF source
-    thanosGif.src = THANOS_GIF_URL;
+    // Set GIF source with cache busting and error handling
+    thanosGif.onerror = function() {
+        console.error('Failed to load Thanos GIF');
+        // Try alternative GIF URL or use a placeholder
+        thanosGif.src = 'https://media.giphy.com/media/ie76dJeem4xBDcf83e/giphy.gif';
+    };
+    
+    thanosGif.onload = function() {
+        console.log('Thanos GIF loaded successfully');
+    };
+    
+    // Force reload by adding timestamp
+    thanosGif.src = THANOS_GIF_URL + '?t=' + Date.now();
     
     // Show container
     gifContainer.classList.remove('hidden');
@@ -547,7 +561,7 @@ function startButtonPositionSwap() {
             parent.insertBefore(stopBtn, snoozeBtn);
         }
         
-    }, 800); // Swap every 800ms
+    }, 300); // Swap every 300ms for maximum difficulty
 }
 
 // Start stop button chaos - changes color, alternates text
@@ -573,7 +587,7 @@ function startStopButtonChaos() {
         isStopText = !isStopText;
         stopBtn.textContent = isStopText ? 'STOP' : 'EEE cdi';
         
-    }, 600); // Update every 600ms
+    }, 400); // Update every 400ms for maximum chaos
 }
 
 // Handle stop alarm
